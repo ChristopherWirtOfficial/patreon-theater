@@ -1,14 +1,15 @@
 {
   "manifest_version": 3,
-  "name": "Patreon Theater Mode",
-  "version": "0.1.0",
-  "description": "Toggle a fit-to-viewport theater view on the Patreon video player. Click the toolbar icon to toggle; Esc to exit.",
+  "name": "Theater Mode for Patreon",
+  "version": "1.0.0",
+  "description": "Fit-to-viewport theater mode for the Patreon video player. Not affiliated with Patreon.",
+  "homepage_url": "https://github.com/ChristopherWirtOfficial/patreon-theater",
   "permissions": ["scripting", "activeTab", "declarativeContent"],
   "background": {
     "service_worker": "background.js"
   },
   "action": {
-    "default_title": "Toggle Patreon Theater Mode",
+    "default_title": "Toggle theater mode",
     "default_icon": {
       "16": "icons/icon16.png",
       "32": "icons/icon32.png",

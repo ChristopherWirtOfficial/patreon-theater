@@ -1,0 +1,10 @@
+# Packaging artifacts
+dist/
+*.zip
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+*.swp
+.vscode/
+.idea/

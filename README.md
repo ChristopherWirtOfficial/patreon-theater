@@ -1,7 +1,10 @@
-# Patreon Theater Mode
+# Theater Mode for Patreon
 
 A tiny Chrome (MV3) extension that gives Patreon's video player a fit-to-viewport
 "theater" view, since the native player has no theater/soft-fullscreen mode.
+
+> Not affiliated with, endorsed by, or sponsored by Patreon. "Patreon" is used
+> only to describe what this extension works with.
 
 Click the toolbar icon to toggle. The largest visible `<video>` on the page is
 reparented into a full-viewport black overlay with `object-fit: contain`, so the
@@ -55,6 +58,21 @@ via `declarativeContent`. Off Patreon the pinned icon is greyed out and does
 nothing; on Patreon it's full-colour and clickable. Chrome does not let an
 extension hide/unpin its own toolbar icon per-site — greying out is the closest
 available behaviour.
+
+## Packaging for the Chrome Web Store
+
+Run the packager to build an upload-ready zip of just the runtime files
+(manifest, scripts, icons — no docs/license/git):
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\package.ps1
+```
+
+It writes `dist/theater-mode-for-patreon-<version>.zip`. Upload that in the
+[Chrome Web Store Developer Dashboard](https://chrome.google.com/webstore/devconsole).
+Listing copy, permission justifications, and the data-use answers are in
+[`STORE_LISTING.md`](STORE_LISTING.md); the privacy policy is in
+[`PRIVACY.md`](PRIVACY.md).
 
 ## Possible next steps
 
