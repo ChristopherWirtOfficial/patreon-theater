@@ -48,7 +48,14 @@ seconds of no mouse movement (like a normal video player).
 - Native video controls are shown in theater mode because Patreon's custom
   control bar is detached during reparenting.
 
+## Site gating
+
+The action is disabled everywhere by default and enabled only on `patreon.com`
+via `declarativeContent`. Off Patreon the pinned icon is greyed out and does
+nothing; on Patreon it's full-colour and clickable. Chrome does not let an
+extension hide/unpin its own toolbar icon per-site — greying out is the closest
+available behaviour.
+
 ## Possible next steps
 
-- Restrict injection to `patreon.com` if you don't want it usable elsewhere.
 - Re-dock Patreon's own controls instead of using native controls.

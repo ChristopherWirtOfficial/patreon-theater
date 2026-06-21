@@ -2,6 +2,26 @@
 // active tab's top frame. activeTab is granted by the click, so we need no
 // broad host permissions. theater.js is self-toggling: each run enters or
 // exits theater based on the page's current state.
+// The toolbar icon can't be removed from the pinned area per-site (pinning is
+// user-controlled), but we can disable it everywhere by default and enable it
+// only on patreon.com. Off Patreon the icon is greyed out and unclickable; on
+// Patreon it's full-colour and live.
+chrome.runtime.onInstalled.addListener(() => {
+  chrome.action.disable();
+  chrome.declarativeContent.onPageChanged.removeRules(undefined, () => {
+    chrome.declarativeContent.onPageChanged.addRules([
+      {
+        conditions: [
+          new chrome.declarativeContent.PageStateMatcher({
+            pageUrl: { hostSuffix: "patreon.com" },
+          }),
+        ],
+        actions: [new chrome.declarativeContent.ShowAction()],
+      },
+    ]);
+  });
+});
+
 chrome.action.onClicked.addListener(async (tab) => {
   if (!tab.id) return;
   try {
