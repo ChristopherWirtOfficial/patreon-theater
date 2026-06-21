@@ -8,6 +8,10 @@ reparented into a full-viewport black overlay with `object-fit: contain`, so the
 whole frame is visible and scales to fill whichever axis (width or height) binds
 first, with aspect ratio preserved.
 
+When theater is on, the toolbar icon shows an **ON** badge, a brief "Press Esc
+to exit" hint fades in, and the cursor + native controls auto-hide after a few
+seconds of no mouse movement (like a normal video player).
+
 ## Exit
 
 - Click the toolbar icon again
@@ -27,9 +31,13 @@ first, with aspect ratio preserved.
 
 - `background.js` — service worker. On toolbar click, injects `theater.js` into
   the active tab. Uses `activeTab` + `scripting`, so no broad host permissions.
+  Listens for `pt-state` messages from the page to keep the toolbar badge/title
+  in sync (so the badge clears even when you exit via Esc or backdrop click).
 - `theater.js` — self-toggling. Runs in the extension's isolated world (which
   persists across injections), keeping toggle state on `window.__patreonTheater`.
-  On exit it restores the video to its exact original DOM position and styles.
+  On exit it restores the video to its exact original DOM position, styles, and
+  `controls` state.
+- `icons/` — coral "fit-to-frame" action icons (16/32/48/128).
 
 ## Known constraints
 
@@ -42,6 +50,5 @@ first, with aspect ratio preserved.
 
 ## Possible next steps
 
-- Add icons (currently uses Chrome's default action icon).
 - Restrict injection to `patreon.com` if you don't want it usable elsewhere.
 - Re-dock Patreon's own controls instead of using native controls.

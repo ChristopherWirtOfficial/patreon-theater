@@ -15,3 +15,18 @@ chrome.action.onClicked.addListener(async (tab) => {
     console.warn("[PatreonTheater] injection failed:", e.message);
   }
 });
+
+// theater.js reports its on/off state (including when the user exits via Esc or
+// backdrop click). Reflect it on the toolbar icon so the state is visible.
+chrome.runtime.onMessage.addListener((msg, sender) => {
+  if (!msg || msg.type !== "pt-state" || !sender.tab) return;
+  const tabId = sender.tab.id;
+  chrome.action.setBadgeText({ tabId, text: msg.active ? "ON" : "" });
+  chrome.action.setBadgeBackgroundColor({ tabId, color: "#ff424d" });
+  chrome.action.setTitle({
+    tabId,
+    title: msg.active
+      ? "Patreon Theater Mode: ON (click or Esc to exit)"
+      : "Toggle Patreon Theater Mode",
+  });
+});
